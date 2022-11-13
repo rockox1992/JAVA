@@ -16,23 +16,15 @@ public class Magician extends BaseHero {
     public void step(List<BaseHero> side) {
         boolean flag = true;
         int cnt = 0;
-        float hp = 5;
         while (flag){
             if (band.get(cnt).health < band.get(cnt).maxHealth){
-                band.get(cnt).health = band.get(cnt).health - band.get(cnt).damage.x;
-                if (band.get(cnt).health > band.get(cnt).maxHealth) {
-                    hp = - band.get(cnt).damage.x - (band.get(cnt).health - band.get(cnt).maxHealth);
-                    band.get(cnt).health = band.get(cnt).maxHealth;
-                }
-
+                band.get(cnt).getDamaged(damage.x);
+                if (band.get(cnt).health > band.get(cnt).maxHealth) band.get(cnt).health = band.get(cnt).maxHealth;
                 flag = false;
-                System.out.println(band.get(cnt).getName() + " healed on " + hp + " " + getName());
+                System.out.println(band.get(cnt).getName() + " healed on " + -damage.x + " " + getName());
                 cnt = 0;
             }
-            if(++cnt == band.size())
-                flag = false;
-            System.out.println(getName() + " Nobody to heal");
+            if (++cnt == band.size()) flag = false;
         }
-    } // сделать метод повреждения, нельзя писать в action, добавить еще одну банду чужих. поле 10 на 10 и степ для монка
-
+        }
 }

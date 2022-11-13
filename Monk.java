@@ -19,22 +19,15 @@ public class Monk extends BaseHero {
     public void step(List<BaseHero> side) {
         boolean flag = true;
         int cnt = 0;
-        float hp = 4;
-        while (flag) {
-            if (band.get(cnt).health < band.get(cnt).maxHealth) {
-                band.get(cnt).health = band.get(cnt).health - band.get(cnt).damage.x;
-                if (band.get(cnt).health > band.get(cnt).maxHealth) {
-                    hp = - band.get(cnt).damage.x - (band.get(cnt).health - band.get(cnt).maxHealth);
-                    band.get(cnt).health = band.get(cnt).maxHealth;
-                }
-
+        while (flag){
+            if (band.get(cnt).health < band.get(cnt).maxHealth){
+                band.get(cnt).getDamaged(damage.x);
+                if (band.get(cnt).health > band.get(cnt).maxHealth) band.get(cnt).health = band.get(cnt).maxHealth;
                 flag = false;
-                System.out.println(band.get(cnt).getName() + " healed on " + hp + " " + getName());
+                System.out.println(band.get(cnt).getName() + " healed on " + -damage.x + " " + getName());
                 cnt = 0;
             }
-            if (++cnt == band.size())
-                flag = false;
-            System.out.println(getName() + " Nobody to heal");
+            if (++cnt == band.size()) flag = false;
         }
 
     }

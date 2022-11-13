@@ -25,7 +25,6 @@ public abstract class BaseHero implements Actions {
     public BaseHero(String name, int health) {
         this.name = name;
         this.health = this.maxHealth = health;
-        this.health--;
         status = "stand";
     }
 
@@ -88,7 +87,7 @@ public abstract class BaseHero implements Actions {
                 " H:" + Math.round(health) +
                 " D:" + defence +
                 " A:" + attack +
-                " Dmg:" + (int)(Math.abs((damage.x+damage.y)/2)) +
+                " Dmg:" + Math.abs((damage.x+damage.y)/2) +
                 (shot>0?" Shots:" + shot:"") + " " +
                 status;
     }

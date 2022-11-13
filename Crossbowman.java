@@ -20,7 +20,7 @@ public class Crossbowman extends BaseHero {
                 index = i;
             }
         }
-        band.get(cnt).getDamaged((damage.x+damage.y)/2);
+        side.get(cnt).getDamaged((damage.x + damage.y)/2);
+        System.out.println(band.get(cnt).getName() + " GreenRDD " + ((damage.x + damage.y)/2) + " " + getName());
     }
 }
-

@@ -4,6 +4,8 @@ public class Spearman extends BaseHero {
     public Spearman(List<BaseHero> band, int x, int y){
         super(String.format("Spearman#%d", ++Spearman.number), 10, 4, 5, 0,
                 new int[]{1, 3}, 4);
+        position = new Vector2(x, y);
+        super.setBand(band);
     }
 
     @Override
@@ -18,6 +20,7 @@ public class Spearman extends BaseHero {
                 index = i;
             }
         }
-        band.get(cnt).getDamaged((damage.x+damage.y)/2);
+        side.get(cnt).getDamaged((damage.x + damage.y)/2);
+        System.out.println(band.get(cnt).getName() + " GreenMDD " + ((damage.x + damage.y)/2) + " " + getName());
     }
 }
