@@ -148,6 +148,10 @@ public class Main {
         tabSetter(darkSide.get(9).returnCondition().length(), l[0]);
         System.out.println(whiteSide.get(9).returnCondition());
         System.out.println(bottom10);
+
+//        for (darkSide.get(k).getStatus(darkSide)){
+//
+//        }
     }
 }
 
