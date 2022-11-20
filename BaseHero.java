@@ -44,12 +44,10 @@ public abstract class BaseHero implements Actions {
         this.damage = new Vector2(damage[0], damage[1]);
         this.speed = speed;
     }
-
     @Override
     public void step(List<BaseHero> side) {
         if (getStatus().equals("Die")) return;
     }
-
 
     public String getName() {
         return name;
