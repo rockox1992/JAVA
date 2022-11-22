@@ -2,8 +2,9 @@ import java.util.List;
 
 public class Spearman extends BaseHero {
 
-    public Spearman(List<BaseHero> band, int x, int y) {
+    public Spearman(List<BaseHero> band, int x, int y, int cnt) {
         super("Spearman", 20, 4, 5, 0, new int[]{1, 3}, 4);
+        count = cnt;
         position = new Vector2(x, y);
         super.setBand(band);
     }
@@ -28,7 +29,7 @@ public class Spearman extends BaseHero {
             int dA = attack - side.get(index).defence;
             float dDam = (dA < 0) ? damage.x : (damage.x + dA) <= damage.y ? (damage.x + dA) : damage.y;
             setStatus("attack: " + side.get(index).getName() + " " + (index + 1) );
-            side.get(index).getDamaged(dDam);
+            side.get(index).getDamaged(dDam * count);
         } else if (flag) {
             Vector2 tmpV = new Vector2(position.x, position.y);
 

@@ -4,8 +4,9 @@ public class Magician extends BaseHero {
    
     private boolean magic;
 
-    public Magician(List<BaseHero> band, int x, int y) {
+    public Magician(List<BaseHero> band, int x, int y, int cnt) {
         super("Magician", 30, 17, 12, 0, new int[]{-2, 0}, 9);
+        count = cnt;
         magic = true;
         position = new Vector2(x, y);
         super.setBand(band);
@@ -18,7 +19,7 @@ public class Magician extends BaseHero {
         int cnt = 0;
         while (flag){
             if (!band.get(cnt).getStatus().equals("Die") && band.get(cnt).health < band.get(cnt).maxHealth){
-                band.get(cnt).getDamaged(damage.x);
+                band.get(cnt).getDamaged(damage.x * count);
                 setStatus("heal: " + side.get(cnt).getName() + " " + (cnt + 1));
                 if (band.get(cnt).health > band.get(cnt).maxHealth) band.get(cnt).health = band.get(cnt).maxHealth;
                 // flag = false;

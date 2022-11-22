@@ -2,8 +2,9 @@ import java.util.List;
 
 public class Sniper extends BaseHero {
     
-    public Sniper(List<BaseHero> band, int x, int y) {
+    public Sniper(List<BaseHero> band, int x, int y, int cnt) {
         super("Sniper", 15, 12, 10, 10, new int[]{4, 6}, 9);
+        count = cnt;
         position = new Vector2(x, y);
         super.setBand(band);
     }
@@ -26,7 +27,7 @@ public class Sniper extends BaseHero {
         if (shot > 0 & flag) {
             setStatus("sh_attack: " + side.get(index).getName() + " " + (index + 1) );
             shot--;
-            side.get(index).getDamaged((damage.x+damage.y)/2);
+            side.get(index).getDamaged((damage.x+damage.y) * count/2);
             for (BaseHero p: band) {
                 if (p.getName().equals("Peasant")) shot++;
             }

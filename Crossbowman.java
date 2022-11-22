@@ -2,8 +2,9 @@ import java.util.List;
 
 public class Crossbowman extends BaseHero {
     
-    public Crossbowman(List<BaseHero> band, int x, int y) {
+    public Crossbowman(List<BaseHero> band, int x, int y, int cnt) {
         super("Crossbowman", 20, 6, 3, 12, new int[]{2, 5}, 4);
+        count = cnt;
         position = new Vector2(x, y);
         super.setBand(band);
     }
@@ -26,7 +27,7 @@ public class Crossbowman extends BaseHero {
         if (shot > 0 & flag) {
             setStatus("sh_attack: " + side.get(index).getName() + " " + (index + 1) );
             shot--;
-            side.get(index).getDamaged((damage.x+damage.y)/2);
+            side.get(index).getDamaged((damage.x+damage.y) * count/2);
             for (BaseHero p: band) {
                 if (p.getName().equals("Peasant")) shot++;
             }
