@@ -3,8 +3,9 @@ import java.util.Objects;
 
 public class Robber extends BaseHero {
 
-    public Robber(List<BaseHero> band, int x, int y) {
+    public Robber(List<BaseHero> band, int x, int y, int cnt) {
         super("Robber", 20, 8, 3, 0, new int[]{2, 4}, 6);
+        count = cnt;
         position = new Vector2(x, y);
         super.setBand(band);
     }
@@ -29,7 +30,7 @@ public class Robber extends BaseHero {
                 int dA = attack - side.get(index).defence;
                 float dDam = (dA < 0) ? damage.x : (damage.x + dA) <= damage.y ? (damage.x + dA) : damage.y;
                 setStatus("attack: " + side.get(index).getName() + " " + (index + 1));
-                side.get(index).getDamaged(dDam);
+                side.get(index).getDamaged(dDam  * count);
             } else if (flag) {
                 Vector2 tmpV = new Vector2(position.x, position.y);
 

@@ -13,6 +13,8 @@ public abstract class BaseHero implements Actions {
     private String status;
     protected List<BaseHero> band;
     protected Vector2 position;
+    protected int count;
+
     
     static {
         number = 0;
@@ -44,12 +46,10 @@ public abstract class BaseHero implements Actions {
         this.damage = new Vector2(damage[0], damage[1]);
         this.speed = speed;
     }
-
     @Override
     public void step(List<BaseHero> side) {
         if (getStatus().equals("Die")) return;
     }
-
 
     public String getName() {
         return name;
@@ -60,14 +60,31 @@ public abstract class BaseHero implements Actions {
     protected void setStatus(String status) {this.status = status;}
     protected void getDamaged(float damagePower) {
         health -= damagePower;
+
         if (health < 1) {
-            status = "Die";
-            health = 0;
+            int tmp = (int) ((maxHealth * count) + health) % maxHealth;
+            if(tmp != 0){
+                count = (int) (((maxHealth * count - tmp) / health) + 1);
+            }
+
+            if(tmp == 0){
+                count = (int) ((maxHealth * count) / health);
+            }
+            if(count < 1){
+                count = 0;
+                health = 0;
+                status = "Die";
+            }
+            else {
+                //health -= damagePower;
+                health = maxHealth;
+            }
         }
     }
     @Override
     public String returnCondition() {
-        return name +
+        return name + " x" + count +
+                " coordinate x:" + position.x + "/y:" + position.y +
                 " H:" + Math.ceil(health) +
                 " D:" + defence +
                 " A:" + attack +
@@ -81,10 +98,10 @@ public abstract class BaseHero implements Actions {
      */
     protected static boolean chPlace(Vector2 tmpV, List<BaseHero> side, List<BaseHero> band ) {
         for (int i = 0; i < side.size(); i++) {
-            if (side.get(i).position.checkPlace(tmpV)) return false;
+            if (side.get(i).position.checkPlace(tmpV) && !side.get(i).getStatus().equals("Die")) return false;
         }
         for (int i = 0; i < band.size(); i++) {
-            if (band.get(i).position.checkPlace(tmpV)) return false;
+            if (band.get(i).position.checkPlace(tmpV) && !band.get(i).getStatus().equals("Die")) return false;
             return true;
         }
         return true;
